@@ -110,8 +110,8 @@ public class DestinoDAO {
 	 return stmt.executeQuery(sql);
 	 
  }
- public static List<Destino> findDest(String pesquisa){
-	 String sql = String.format("SELECT * FROM destinos WHERE paises like '%s%%' OR obraR LIKE '%s%%'", pesquisa, pesquisa);
+ public static List<Destino> findDest(){
+	 String sql = "SELECT * FROM destinos";
 	 List<Destino> destinos = new ArrayList<Destino>();
 	 try {
 		 Statement stmt = connection.createStatement();

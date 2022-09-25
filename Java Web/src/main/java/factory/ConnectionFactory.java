@@ -8,17 +8,12 @@ public class ConnectionFactory {
 	private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/agenciaviagens";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "084Lb21987JsR10k^";
-	/*
-	public Connection getConnection() {
-		try {
-			return DriverManager.getConnection(DATABASE_URL,USERNAME,PASSWORD);
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}*/
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	
+	
 	public static Connection createConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(DRIVER);
 			System.out.println("Driver found.");
 		}catch(ClassNotFoundException e) {
 			System.out.println("Driver not found. " + e.getMessage());

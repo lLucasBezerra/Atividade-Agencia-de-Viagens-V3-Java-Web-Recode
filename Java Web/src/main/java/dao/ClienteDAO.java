@@ -18,7 +18,7 @@ public class ClienteDAO {
 	 this.connection = new ConnectionFactory().getConnection();
  }
  */
- public void save(Cliente cliente) {
+ public static void save(Cliente cliente) {
 	 //CREATE
 	 String sql = "INSERT INTO cliente VALUES(null, ?, ?, ?, ?)";
 	 try {
@@ -30,8 +30,9 @@ public class ClienteDAO {
 		 
 		 stmt.executeUpdate();
 		 stmt.close();
+		 System.out.println("cliente salvo com sucesso");
 	 }catch (SQLException e) {
-		 e.printStackTrace();
+		 System.out.println("não foi possivel salver os dados "+ e.getMessage());
 	 }
  }
  
@@ -137,7 +138,7 @@ public class ClienteDAO {
 	 }
  }
  
- public void pegarID(Cliente cliente) {
+ public static void pegarID(Cliente cliente) {
 	 //PEGANDO O ID PARA PODER FAZER O METODO fazerRelacao()
 	 String sql = "SELECT codCli FROM cliente WHERE cpf="+cliente.getCpf();
 	 ResultSet resultado = null;

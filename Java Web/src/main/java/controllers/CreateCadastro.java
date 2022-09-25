@@ -1,7 +1,8 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ClienteDAO;
 import model.Cliente;
 
 /**
@@ -17,6 +19,9 @@ import model.Cliente;
 @WebServlet("/Cadastrando")
 public class CreateCadastro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	//para tentar usar o id dele
+	List<Cliente> clientes = new ArrayList<Cliente>();
+	Cliente cli = new Cliente();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,11 +44,16 @@ public class CreateCadastro extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Cliente cli = new Cliente();
 		cli.setCpf(request.getParameter("cpf"));
 		cli.setOrigem(request.getParameter("origem"));
 		cli.setDataIda(request.getParameter("dataIda"));
 		cli.setDataVolta(request.getParameter("dataVolta"));
+		
+		ClienteDAO.save(cli);
+		ClienteDAO.pegarID(cli);
+		System.out.println(cli.getId());
+		
+		clientes.add(cli);
 		
 		//doGet(request, response);
 	}

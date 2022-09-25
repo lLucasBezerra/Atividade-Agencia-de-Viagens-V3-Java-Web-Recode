@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Date;
 
 public class Cliente {
 	private int id;
@@ -10,8 +9,8 @@ public class Cliente {
 	
 	private Destino destino; //fk
 	
-	private Date dataVolta;
-	private Date dataIda;
+	private String dataVolta;
+	private String dataIda;
 	
 	//GET E SET
 	//ID
@@ -43,18 +42,18 @@ public class Cliente {
 		this.destino = destino;
 	}
 	//DATA DE VOLTA
-	public Date getDataVolta() {
+	public String getDataVolta() {
 		return dataVolta;
 	}
-	public void setDataVolta(Date dataVolta) {
-		this.dataVolta = dataVolta;
+	public void setDataVolta(String string) {
+		this.dataVolta = string;
 	}
 	//DATA DE IDA
-	public Date getDataIda() {
+	public String getDataIda() {
 		return dataIda;
 	}
-	public void setDataIda(Date dataIda) {
-		this.dataIda = dataIda;
+	public void setDataIda(String string) {
+		this.dataIda = string;
 	}
 	//CPF
 	public String getCpf() {

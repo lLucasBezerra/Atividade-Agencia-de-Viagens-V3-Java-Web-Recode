@@ -25,7 +25,7 @@ public class PromocoesDAO {
 			 stmt.setInt(1, promocoes.getDesconto());
 			 stmt.setString(2, promocoes.getNomePromo());
 			 
-			 stmt.execute();
+			 stmt.executeUpdate();
 			 stmt.close();
 		 }catch(SQLException e) {
 			 e.printStackTrace();
@@ -33,11 +33,12 @@ public class PromocoesDAO {
 	}
 	
 	public void removeById(int id) {
-		String sql = "DELETE FROM promocoes WHERE codPromo="+id;
+		String sql = "DELETE FROM promocoes WHERE codPromo=?";
 		 try {
 			 PreparedStatement stmt = connection.prepareStatement(sql);
+			 stmt.setInt(1, id);
 			 
-			 stmt.execute();
+			 stmt.executeUpdate();
 			 stmt.close();
 		 }catch (SQLException e) {
 			 //ISSO TUDO PARA Q NÃO OCORRA O MESMO PROBLEMA COM O CLIENTE

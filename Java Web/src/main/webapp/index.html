@@ -45,7 +45,7 @@
 
       </header>
     </section>
-
+    
 
 
     <section class="container-fluid" style="margin-bottom: 200px;">
@@ -116,34 +116,36 @@
 
             <!-- iniciando formulario ------------------->
             <div>
-              <form class="cadastro-rapido" action="./cadastroRapido.html">
+              <form name="frmCadastro" class="cadastro-rapido" action="Cadastrando" method="POST">
                 
                 <!-- titulo -->
                 <h3 class="titulo linha">Cadastre seu destino!</h3>
 
                 <div class="div-form">
 
+
+ 					<!-- CPF -->
+                  <div class="input" style="display: flex; flex-direction:column;">
+                  					<!-- com  -> "required" <-  não ha necessidade de criar um arquivo js so para validar -->
+                    <input name="cpf" type="text" placeholder="CPF" required>
+                    <small id="emailHelpId" class="form-text text-muted" style="margin-left: 8px;">CPF</small>
+                  </div>
+                  
                   <!-- Origem -->
                   <div class="input" style="display: flex; flex-direction:column;">
-                    <input type="text" placeholder="Origem">
+                    <input name="origem" type="text" placeholder="Origem" required>
                     <small id="emailHelpId" class="form-text text-muted" style="margin-left: 8px;">Origem</small>
-                  </div>
-
-                  <!-- Destino -->
-                  <div class="input" style="display: flex; flex-direction:column;">
-                    <input type="text" placeholder="Destino">
-                    <small id="emailHelpId" class="form-text text-muted" style="margin-left: 8px;">Destino</small>
                   </div>
 
                   <!-- Data da ida -->
                   <div class="input" style="display: flex; flex-direction:column;">
-                    <input type="date" placeholder="Destino">
+                    <input name="dataIda" type="date" required>
                     <small id="emailHelpId" class="form-text text-muted" style="margin-left: 8px;">Data de Ida</small>
                   </div>
 
                   <!-- Data da volta -->
                   <div class="input" style="display: flex; flex-direction:column;">
-                    <input type="date" placeholder="Destino">
+                    <input name="dataVolta" type="date" required>
                     <small id="emailHelpId" class="form-text text-muted" style="margin-left: 8px;">Data de Volta</small>
                   </div>
 

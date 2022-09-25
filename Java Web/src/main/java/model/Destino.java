@@ -7,6 +7,7 @@ public class Destino {
 	private String cidade;
 	private String obraR;
 	private Voo voo; //fk
+	private Promocoes promo;
 	
 	
 	//GET AND SET
@@ -48,5 +49,12 @@ public class Destino {
 	}
 	public void setVoo(Voo voo) {
 		this.voo = voo;
+	}
+	//PROMO
+	public Promocoes getPromo() {
+		return promo;
+	}
+	public void setPromo(Promocoes promo) {
+		this.promo = promo;
 	}
 }

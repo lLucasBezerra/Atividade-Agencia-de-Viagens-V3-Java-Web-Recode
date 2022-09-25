@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.sql.Date;
 
 import factory.ConnectionFactory;
 import model.Cliente;
@@ -26,10 +25,10 @@ public class ClienteDAO {
 		 PreparedStatement stmt = connection.prepareStatement(sql);
 		 stmt.setString(1, cliente.getCpf());
 		 stmt.setString(2, cliente.getOrigem());
-		 stmt.setDate(3, new Date(cliente.getDataVolta().getTime()));
-		 stmt.setDate(4, new Date(cliente.getDataIda().getTime()));
+		 stmt.setString(3, cliente.getDataVolta());
+		 stmt.setString(4, cliente.getDataIda());
 		 
-		 stmt.execute();
+		 stmt.executeUpdate();
 		 stmt.close();
 	 }catch (SQLException e) {
 		 e.printStackTrace();
@@ -43,7 +42,7 @@ public class ClienteDAO {
 		 PreparedStatement stmt = connection.prepareStatement(sql);
 		 stmt.setInt(1, id);
 		 
-		 stmt.execute();
+		 stmt.executeUpdate();
 		 stmt.close();
 	 }catch (SQLException e) {
 		 e.printStackTrace();
@@ -71,8 +70,8 @@ public class ClienteDAO {
 	 PreparedStatement stmt = connection.prepareStatement(sql);
 	 stmt.setString(1, cliente.getCpf());
 	 stmt.setString(2, cliente.getOrigem());
-	 stmt.setDate(3, new Date(cliente.getDataVolta().getTime()));
-	 stmt.setDate(4, new Date(cliente.getDataIda().getTime()));
+	 stmt.setString(3, cliente.getDataVolta());
+	 stmt.setString(4, cliente.getDataIda());
 	 stmt.setInt(5, id);
 	 
 	 stmt.execute();
@@ -116,25 +115,26 @@ public class ClienteDAO {
 	 return resultado;
  }
  
- public ResultSet getCpfCliente(Cliente cliente) throws SQLException{
-	 //READ (PARA O CLIENTE USAR)
-	 String sql = "SELECT * FROM cliente WHERE cpf="+cliente.getCpf();
-	 ResultSet resultado = null;
+  public static Cliente findCli(int id) {
+	 String sql = "SELEC * FROM cliente WHERE codCli=?";
+	 
 	 try {
-		 PreparedStatement stmt = connection.prepareStatement(sql);
-		 resultado = stmt.executeQuery(sql);
-		 
-		 if(resultado.next()) {
-			 System.out.println("ID -- >"+resultado.getInt(1));
-			 System.out.println("CPF -- >"+resultado.getString(2));
-			 System.out.println("LOCAL DE ORIGEM -- >"+resultado.getString(3));
-			 System.out.println("DATA DE VOLTA -- >"+resultado.getDate(4));
-			 System.out.println("DATA DE IDA -- >"+resultado.getDate(5));
+		 Statement stmt = connection.createStatement();
+		 ResultSet rs = stmt.executeQuery(sql);
+		 Cliente cli = new Cliente();
+		 while(rs.next()) {
+			 cli.setId(rs.getInt("codCli"));
+			 cli.setCpf(rs.getString("cpf"));
+			 cli.setOrigem(rs.getString("origem"));
+			 cli.setDataIda(rs.getString("dataVolta"));
+			 cli.setDataVolta(rs.getString("dataIda"));
 		 }
-	 }catch (SQLException e) {
-		 e.printStackTrace();
+		 System.out.println("cliente encontrado");
+		 return cli;
+	 }catch(SQLException e){
+		 System.out.println("não foi possível encontrar cliente. " + e.getMessage());
+		 return null;
 	 }
-	 return resultado;
  }
  
  public void pegarID(Cliente cliente) {

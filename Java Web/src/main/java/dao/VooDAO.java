@@ -26,7 +26,7 @@ public class VooDAO {
 			stmt.setString(1, voo.getCompanhia());
 			stmt.setDouble(2, voo.getPrecoVoo());
 			
-			stmt.execute();
+			stmt.executeUpdate();
 			stmt.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class VooDAO {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 			
-			stmt.execute();
+			stmt.executeUpdate();
 			stmt.close();
 		}catch (SQLException e) {
 			 //ISSO TUDO PARA Q NÃO OCORRA O MESMO PROBLEMA COM O CLIENTE

@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import factory.ConnectionFactory;
 import model.Destino;
+import model.Promocoes;
 
 public class DestinoDAO {
  //private Connection connection;
@@ -26,7 +29,7 @@ public class DestinoDAO {
 		 stmt.setString(2, destino.getCidade());
 		 stmt.setString(3, destino.getObraR());
 		 
-		 stmt.execute();
+		 stmt.executeUpdate();
 		 stmt.close();
 	 }catch (SQLException e) {
 		 e.printStackTrace();
@@ -39,7 +42,7 @@ public class DestinoDAO {
 	 PreparedStatement stmt = connection.prepareStatement(sql);
 	 stmt.setInt(1, id);
 	 
-	 stmt.execute();
+	 stmt.executeUpdate();
 	 stmt.close();
 	 }catch (SQLException e) {
 		 //ISSO TUDO PARA Q NÃO OCORRA O MESMO PROBLEMA COM O CLIENTE
@@ -76,6 +79,8 @@ public class DestinoDAO {
 	 }
  }
  
+ 
+ 
  public void adcUmaPromo(int idDest, int idPromo) {
 	 //UPDATE															
 	 String sql = "UPDATE destinos SET fk_codPromo = ? WHERE codDest = ?";
@@ -105,22 +110,30 @@ public class DestinoDAO {
 	 return stmt.executeQuery(sql);
 	 
  }
- public ResultSet getUmDestino(int id) throws SQLException{
-	 //READ (UNICO)
-	 String sql = "SELECT * FROM destinos WHERE codDest="+id;
-	 ResultSet resultado = null;
+ public static List<Destino> findDest(String pesquisa){
+	 String sql = String.format("SELECT * FROM destinos WHERE paises like '%s%%' OR obraR LIKE '%s%%'", pesquisa, pesquisa);
+	 List<Destino> destinos = new ArrayList<Destino>();
 	 try {
-		 PreparedStatement stmt = connection.prepareStatement(sql);
-		 resultado = stmt.executeQuery(sql);
-		 if(resultado.next()) {
-			 System.out.println("ID -- >"+resultado.getInt(1));
-			 System.out.println("PAÍS -- >"+resultado.getString(2));
-			 System.out.println("CIDADE -- >"+resultado.getString(3));
+		 Statement stmt = connection.createStatement();
+		 ResultSet rs = stmt.executeQuery(sql);
+		 while(rs.next()) {
+			 Destino dest = new Destino();
+			 dest.setId(rs.getInt("codDest"));
+			 dest.setPais(rs.getString("paises"));
+			 dest.setCidade(rs.getString("cidade"));
+			 dest.setObraR(rs.getString("obraR"));
+			 Promocoes promo = new Promocoes();
+			 dest.setPromo(promo);
+			 dest.getPromo().setId(rs.getInt("fk_codPromo"));
+			 
+			 destinos.add(dest);
 		 }
-	 }catch (SQLException e) {
-		 e.printStackTrace();
+		 System.out.println("destino encontrado");
+		 return destinos;
+	 }catch(SQLException e) {
+		 System.out.println("não foi possível encontrar tal destino " + e.getMessage());
+		 return null;
 	 }
-	 return resultado;
  }
 }
 

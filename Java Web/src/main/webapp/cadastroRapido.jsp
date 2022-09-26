@@ -46,47 +46,76 @@
      </section>
 
 	<section class="container cadastro">
-    <h1 class="titulo">Próximos passos do Cadastro</h1>
+	<form action="cadastrandoII" method="get">
+    	<h1 class="titulo">Próximos passos do Cadastro</h1>
     
     
-    <h3 class="titulo">Destinos disponíveis</h3>
+    	<h3 class="titulo">Destinos disponíveis</h3>
     <%-- page import="dao.DestinoDAO, java.util.*, model.Destino" --%>
     <%-- 
     List<Destino> destinos = DestinoDAO.findDest(); 
     request.setAttribute("destinos", destinos);
     --%>
-<table class="table">
-  <thead class="thead">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">PAÍSES</th>
-      <th scope="col">CIDADE</th>
-      <th scope="col">OBRA RELACIONADA</th>
-      <th scope="col">ID PROMOÇÃO</th>
-    </tr>
-  </thead>
-  <tbody>
-  	<c:forEach items="${destinos}" var="destinos">
-    	<tr>
-      		<th scope="row">${destinos.getId()}</th>
-      		<td>${destinos.getPais()}</td>
-      		<td>${destinos.getCidade()}</td>
-      		<td>${destinos.getObraR()}</td>
+	<table class="table">
+  		<thead class="thead">
+    		<tr>
+     		 <th scope="col">ID</th>
+     		 <th scope="col">PAÍSES</th>
+     		 <th scope="col">CIDADE</th>
+     		 <th scope="col">OBRA RELACIONADA</th>
+     		 <th scope="col">ID PROMOÇÃO</th>
+     		 <th scope="col">ESCOLHA</th>
+    		</tr>
+  		</thead>
+  		<tbody>
+  			<c:forEach items="${destinos}" var="destinos">
+    			<tr>
+      				<th scope="row">${destinos.getId()}</th>
+      				<td>${destinos.getPais()}</td>
+      				<td>${destinos.getCidade()}</td>
+      				<td>${destinos.getObraR()}</td>
       		
-      		<td>
-      		<!-- aprendendo isso pra não deixar um NULL no meio da tabela -->
-      			<c:set var="promocao" value="${destinos.getPromo().getId()}"/>
-      			<c:if test="${promocao == 0}">
-      				<strong><c:out value="Não está em promoção"/></strong>
-      			</c:if>
-      			<c:if test="${promocao != 0}">
-      				<strong><c:out value="${promocao}"/></strong>
-      			</c:if>
-      		</td>
-    	</tr>
-    </c:forEach>
-  </tbody>
-</table>
+      				<td>
+      				<!-- aprendendo isso pra não deixar um NULL no meio da tabela -->
+      					<c:set var="promocao" value="${destinos.getPromo().getId()}"/>
+      					<c:if test="${promocao == 0}">
+      						<strong><c:out value="Não está em promoção"/></strong>
+      					</c:if>
+      					<c:if test="${promocao != 0}">
+      						<strong><c:out value="${promocao}"/></strong>
+      					</c:if>
+      				</td>
+      				<td><input type="checkbox" name="idDest" value="${destinos.getId()}"></td>
+    			</tr>
+    		</c:forEach>
+  		</tbody>
+	</table>
+
+
+	<h3 class="titulo">Escolhendo sua companhia de viagens</h3>
+
+	<table class="table">
+ 		 <thead class="thead">
+   		 <tr>
+      		<th scope="col">ID</th>
+      		<th scope="col">COMPANHIA DE VIAGENS</th>
+      		<th scope="col">PREÇO</th>
+      		<th scope="col">ESCOLHA</th>
+    		</tr>
+  		</thead>
+  		<tbody>
+  			<c:forEach items="${voos}" var="voos">
+    			<tr>
+      				<th scope="row">${voos.getId()}</th>
+      				<td>${voos.getCompanhia()}</td>
+      				<td><strong>${voos.getPrecoVoo()}</strong></td>
+      				<td><input type="checkbox" name="idVoo" value="${voos.getId()}"></td>
+    			</tr>
+    		</c:forEach>
+  		</tbody>
+	</table>
+	<input type="submit" value="fim!">
+</form>
     
 	</section>
 	

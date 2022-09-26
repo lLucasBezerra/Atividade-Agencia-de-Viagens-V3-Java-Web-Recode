@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDAO;
 import dao.DestinoDAO;
+import dao.VooDAO;
 import model.Cliente;
 import model.Destino;
+import model.Voo;
 
 /**
  * Servlet implementation class CreateCadastro
@@ -43,6 +45,8 @@ public class CreateCadastro extends HttpServlet {
 		
 		List<Destino> destinos = DestinoDAO.findDest(); 
 	    request.setAttribute("destinos", destinos);
+	    List<Voo> voos = VooDAO.findVoo();
+	    request.setAttribute("voos", voos);
 	    
 	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("cadastroRapido.jsp");
 		requestDispatcher.forward(request, response);

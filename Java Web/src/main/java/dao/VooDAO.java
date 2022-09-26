@@ -5,18 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import factory.ConnectionFactory;
 import model.Voo;
 
 public class VooDAO {
-	//private Connection connection;
 	 private static Connection connection = ConnectionFactory.createConnection();
-	 
-	 /*
-	public VooDAO(){
-		this.connection = new ConnectionFactory().getConnection();
-	}*/
+
 	
 	public void save(Voo voo) {
 		//CREATE
@@ -106,4 +103,28 @@ public class VooDAO {
 		}
 		return resultado;
 	}
+	//IMPORTANTE
+		 public static List<Voo> findVoo(){
+			 String sql = "SELECT * FROM voo";
+			 List<Voo> Voos = new ArrayList<Voo>();
+			 try {
+				 Statement stmt = connection.createStatement();
+				 ResultSet rs = stmt.executeQuery(sql);
+				 while(rs.next()) {
+					 Voo voo= new Voo();
+					 voo.setId(rs.getInt("codVoo"));
+					 voo.setCompanhia(rs.getString("companhiaV"));
+					 voo.setPrecoVoo(rs.getDouble("preco"));
+					 
+					
+					 
+					 Voos.add(voo);
+				 }
+				 System.out.println("Companhias encontradas");
+				 return Voos;
+			 }catch(SQLException e) {
+				 System.out.println("não foi possível encontrar Companhias" + e.getMessage());
+				 return null;
+			 }
+		 }
 }	

@@ -5,17 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import factory.ConnectionFactory;
 import model.Promocoes;
 
 public class PromocoesDAO {
-	//private Connection connection;
 	 private static Connection connection = ConnectionFactory.createConnection();
-	/*
-	public PromocoesDAO() {
-		this.connection = new ConnectionFactory().getConnection();
-	}*/
+
 	
 	public void create(Promocoes promocoes) {
 		//CREATE
@@ -88,5 +86,31 @@ public class PromocoesDAO {
 			 e.printStackTrace();
 		 }
 		 return resultado;
+	 }
+	 
+	 
+	//IMPORTANTE
+	 public static List<Promocoes> findPromo(){
+		 String sql = "SELECT * FROM promocoes";
+		 List<Promocoes> promocoes = new ArrayList<Promocoes>();
+		 try {
+			 Statement stmt = connection.createStatement();
+			 ResultSet rs = stmt.executeQuery(sql);
+			 while(rs.next()) {
+				 Promocoes promo= new Promocoes();
+				 promo.setId(rs.getInt("codPromo"));
+				 promo.setDesconto(rs.getInt("desconto"));
+				 promo.setNomePromo(rs.getString("nomePromo"));
+				 
+				
+				 
+				 promocoes.add(promo);
+			 }
+			 System.out.println("Promoções encontradas");
+			 return promocoes;
+		 }catch(SQLException e) {
+			 System.out.println("não foi possível encontrar promoções " + e.getMessage());
+			 return null;
+		 }
 	 }
 }

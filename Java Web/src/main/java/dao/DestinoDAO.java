@@ -110,6 +110,7 @@ public class DestinoDAO {
 	 return stmt.executeQuery(sql);
 	 
  }
+ //IMPORTANTE
  public static List<Destino> findDest(){
 	 String sql = "SELECT * FROM destinos";
 	 List<Destino> destinos = new ArrayList<Destino>();

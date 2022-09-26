@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
   
     <!-- Bootstrap CSS v5.2.0-beta1 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-      <!-- <script src="./script.js"></script> -->
-    <title>Document</title>
+   
+    <link rel="stylesheet" href="./style.css">
+    <title>Escolhendo destino</title>
 </head>
 <body>
 
@@ -46,7 +46,7 @@
      </section>
 
 	<section class="container cadastro">
-	<form action="cadastrandoII" method="get">
+	<form class="cadDestino" action="cadastrandoII" method="GET">
     	<h1 class="titulo">Próximos passos do Cadastro</h1>
     
     
@@ -57,7 +57,7 @@
     request.setAttribute("destinos", destinos);
     --%>
 	<table class="table">
-  		<thead class="thead">
+  		<thead class="thead-dark" style="backgroun-color: var(--cor-s)">
     		<tr>
      		 <th scope="col">ID</th>
      		 <th scope="col">PAÍSES</th>
@@ -67,7 +67,7 @@
      		 <th scope="col">ESCOLHA</th>
     		</tr>
   		</thead>
-  		<tbody>
+  		<tbody class="bodyTable">
   			<c:forEach items="${destinos}" var="destinos">
     			<tr>
       				<th scope="row">${destinos.getId()}</th>
@@ -95,7 +95,7 @@
 	<h3 class="titulo">Escolhendo sua companhia de viagens</h3>
 
 	<table class="table">
- 		 <thead class="thead">
+ 		 <thead class="thead cabecalho-table">
    		 <tr>
       		<th scope="col">ID</th>
       		<th scope="col">COMPANHIA DE VIAGENS</th>
@@ -114,7 +114,7 @@
     		</c:forEach>
   		</tbody>
 	</table>
-	<input type="submit" value="fim!">
+	<input type="submit" value="fim!" class="btn btn-success">
 </form>
     
 	</section>

@@ -154,7 +154,7 @@ public class ClienteDAO {
 	 }
  }
  
- public void fazerRelacao(Cliente cliente) {
+ public static void fazerRelacao(Cliente cliente) {
 	 //PARA FAZER RELAÇÃO MUITOS PARA MUITOS
 	 String sql = "INSERT INTO escolher VALUES(?,?,?)";
 	 try {

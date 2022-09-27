@@ -84,7 +84,13 @@
 	<div class="row">
 		<h3 class="titulo">Destino selecionado</h3>
 		<div class="mb-3">
-  			<input type="text" class="form-control habilitar" name="idDestino" aria-describedby="helpId" value="${cliente.getDestino().getId()}" disabled>
+			<select class="form-select habilitar" name="idDestino" aria-label="Default select example" disabled>
+  				<option selected value="${cliente.getDestino().getId()}"> ${cliente.getDestino().getId()} </option>
+				<c:forEach items="${destinos}" var="destinos">
+					 <option value="${destinos.getId()}"> ${destinos.getId()} -- ${destinos.getPais()}</option>
+				</c:forEach>
+  		
+			</select>
   			<small id="helpId" class="form-text text-muted">Id do destino selecionado</small>
 		</div>
 		<div class="col-sm">
@@ -120,7 +126,13 @@
 	
 		<h3 class="titulo">Companhia que será usada</h3>
 		<div class="col-sm mb-3">
-  			<input type="text" class="form-control habilitar" name="idVoo" aria-describedby="helpId" value="${cliente.getDestino().getVoo().getId()}" disabled>
+				<select class="form-select habilitar"  name="idVoo" aria-label="Default select example" disabled>
+  					<option selected value="${cliente.getDestino().getVoo().getId()}"> ${cliente.getDestino().getVoo().getId()} </option>
+					<c:forEach items="${voos}" var="voos">
+					 <option value="${voos.getId()}"> ${voos.getId()} -- ${voos.getCompanhia()} -- ${voos.getPrecoVoo()}</option>
+				</c:forEach>
+  		
+			</select>
   			<small id="helpId" class="form-text text-muted">Id da companhia selecionada</small>
 		</div>
 		<div class="col-sm mb-3">

@@ -82,7 +82,14 @@ public class CreateCadastro extends HttpServlet {
 
 			//FAZENDO RELAÇÃO E PEGANDO T O D O S  O S  D A D O S DO CLIENTE
 			ClienteDAO.fazerRelacao(cli);
+			
 			Cliente cliente = ClienteDAO.mostrarTudo(cli);
+			//isso tudo pra fazer um select melhor
+			List<Voo> voos = VooDAO.findVoo();
+			 List<Destino> destinos = DestinoDAO.findDest();
+			request.setAttribute("destinos", destinos);
+			request.setAttribute("voos", voos);
+			//-----
 			request.setAttribute("cliente", cliente);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("confirmarCadastro.jsp");
 			requestDispatcher.forward(request, response);

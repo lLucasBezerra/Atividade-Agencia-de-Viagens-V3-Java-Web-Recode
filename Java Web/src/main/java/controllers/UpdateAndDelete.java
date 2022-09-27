@@ -16,7 +16,7 @@ import model.Voo;
 /**
  * Servlet implementation class UpdateAndDelete
  */
-@WebServlet(urlPatterns ={ "/confirmar", "/excluir", "/editar" })
+@WebServlet(urlPatterns ={ "/confirmar", "/editar" })
 public class UpdateAndDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,9 +60,6 @@ public class UpdateAndDelete extends HttpServlet {
 		}else if(action.equals("/editar")) {
 			ClienteDAO.update(cli);
 			ClienteDAO.atualizarRelação(cli);
-		}else if(action.equals("/excluir")) {
-			ClienteDAO.removeById(cli.getId());
-			ClienteDAO.removerRelação(cli.getId());
 		}
 		
 		response.sendRedirect("index.html");

@@ -46,8 +46,9 @@ public class ClienteDAO {
 		 
 		 stmt.executeUpdate();
 		 stmt.close();
+		 System.out.println("cliente deletado");
 	 }catch (SQLException e) {
-		 e.printStackTrace();
+		 System.out.println("não foi possivel deletar " + e.getMessage());
 	 }
  }
  //CRIADO PARA REMOVER A RELAÇÃO NA TABELA ESCOLHA, POIS COM ELA NÃO DARIA PARA REMOVER
@@ -61,8 +62,9 @@ public class ClienteDAO {
 		 
 		 stmt.executeUpdate();
 		 stmt.close();
+		 System.out.println("deletadando relação");
 	 }catch (SQLException e) {
-		 e.printStackTrace();
+		 System.out.println("não foi possivel deletar relação "+e.getMessage());
 	 }
  }
  //IMPORTANTE

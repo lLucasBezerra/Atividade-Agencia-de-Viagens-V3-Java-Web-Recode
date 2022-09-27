@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
     <!-- Bootstrap CSS v5.2.0-beta1 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
    
     <link rel="stylesheet" href="./style.css">
     <title>Confirmando Cadastro</title>
@@ -44,7 +43,104 @@
         </header>
      </section>
      
-	<h1>oi</h1>
+	
+	
+	<section class="container">
+	<h1 class="titulo">Confirmar cadastro</h1>
+	<form id="frmConfirmar" action="" method="GET">
+	<div class="row">
+		<h3 class="titulo">Seus dados</h3>
+		
+		<div class="mb-3">
+  			<input type="text" class="form-control" name="idCliente" aria-describedby="helpId" value="${cliente.getId()}" readonly>
+  			<small id="helpId" class="form-text text-muted">Seu Id</small>
+		</div>
+		<div class="col-sm">
+			<div class="mb-3">
+  				<input type="text" class="form-control habilitar" name="cpf" aria-describedby="helpId" value="${cliente.getCpf()}" disabled>
+  				<small id="helpId" class="form-text text-muted">CPF</small>
+			</div>
+			<div class="mb-3">
+  				<input type="text" class="form-control habilitar" name="origem" aria-describedby="helpId" value="${cliente.getOrigem()}" disabled>
+  				<small id="helpId" class="form-text text-muted">Origem</small>
+			</div>
+		</div>
+		
+		<div class="col-sm">
+		
+			<div class="mb-3">
+	  			<input type="date" class="form-control habilitar" name="dataVolta" aria-describedby="helpId" value="${cliente.getDataVolta()}" disabled>
+  				<small id="helpId" class="form-text text-muted">Data de Volta</small>
+			</div>
+			<div class="mb-3">
+  				<input type="date" class="form-control habilitar" name="dataIda" aria-describedby="helpId" value="${cliente.getDataIda()}" disabled>
+  				<small id="helpId" class="form-text text-muted">Data de Ida</small>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<div class="row">
+		<h3 class="titulo">Destino selecionado</h3>
+		<div class="mb-3">
+  			<input type="text" class="form-control habilitar" name="idDestino" aria-describedby="helpId" value="${cliente.getDestino().getId()}" disabled>
+  			<small id="helpId" class="form-text text-muted">Id do destino selecionado</small>
+		</div>
+		<div class="col-sm">
+			<div class="mb-3">
+  				<input type="text" class="form-control" name="pais" aria-describedby="helpId" value="${cliente.getDestino().getPais()}" readonly>
+  				<small id="helpId" class="form-text text-muted">País</small>
+			</div>
+			<div class="mb-3">
+  				<input type="text" class="form-control" name="obraR" aria-describedby="helpId" value="${cliente.getDestino().getObraR()}" readonly>
+  				<small id="helpId" class="form-text text-muted">Obra Relacionada</small>
+			</div>
+			<div class="mb-3">
+	  			<input type="text" class="form-control" name="cidade" aria-describedby="helpId" value="${cliente.getDestino().getCidade()}" readonly>
+  				<small id="helpId" class="form-text text-muted">Cidade</small>
+			</div>
+		</div>
+		
+		<div class="col-sm">
+			<c:set var="promocao" value="${cliente.getDestino().getPromo().getId()}"/>
+     			<c:if test="${promocao == 0}">
+      				<input value="Não há promoção" readonly>
+   			</c:if>
+   			<c:if test="${promocao != 0}">
+   				<div class="mb-3">
+  					<input type="text" class="form-control" name="promocao" aria-describedby="helpId" value="${promocao}" readonly>
+  					<small id="helpId" class="form-text text-muted">Promoção</small>
+				</div>
+			</c:if>
+		</div>
+	</div>
+	
+	<div class="row">
+	
+		<h3 class="titulo">Companhia que será usada</h3>
+		<div class="col-sm mb-3">
+  			<input type="text" class="form-control habilitar" name="idVoo" aria-describedby="helpId" value="${cliente.getDestino().getVoo().getId()}" disabled>
+  			<small id="helpId" class="form-text text-muted">Id da companhia selecionada</small>
+		</div>
+		<div class="col-sm mb-3">
+  			<input type="text" class="form-control" name="companhia" aria-describedby="helpId" value="${cliente.getDestino().getVoo().getCompanhia()}" readonly>
+  			<small id="helpId" class="form-text text-muted">Companhia Aérea</small>
+		</div>
+		<div class="col-sm mb-3">
+  			<input type="text" class="form-control" name="preco" aria-describedby="helpId" value="${cliente.getDestino().getVoo().getPrecoVoo()}" readonly>
+  			<small id="helpId" class="form-text text-muted">Preço</small>
+		</div>
+		
+	</div>
+	<button type="button" class="btn btn-primary" onClick="edicao()">Editar</button>
+	<input id="confirmar" class="btn btn-success" type="submit" value="Confirmar">
+	<input id="editar" class="btn btn-primary" type="submit" value="Atualizar" style="display:none">
+	<input id="excluir" class="btn btn-danger" type="submit" value="Excluir">
+	
+	</form>
+	
+	</section>
 	
 	
 	
@@ -52,6 +148,45 @@
 	
 	
 	
+	 <!-- Footer -->
+  <section class="container-fluid">
+     <footer class="py-3 my-4">
+       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+         <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
+         <li class="nav-item"><a href="./promocoes.html" class="nav-link px-2 text-muted">Promoções</a></li>
+         <li class="nav-item"><a href="./destino.html" class="nav-link px-2 text-muted">Destinos</a></li>
+         <li class="nav-item"><a href="./contato.html" class="nav-link px-2 text-muted">Contatos</a></li>
+       </ul>
+       <p class="text-center text-muted">© 2022 Viagens & Cinema</p>
+     </footer>
+  </section>
+	
+	
+	
+
+	<script>
+    let input = document.getElementsByClassName("habilitar");
+    let atualizar = document.getElementById("editar");
+    function edicao(){
+    	
+        for(let i=0; i < input.length; i++){
+            input[i].disabled=false;
+        }
+        atualizar.style.removeProperty("display");
+        document.getElementById("confirmar").style.display="none";
+
+    }
+    document.getElementById("editar").onclick = function(){
+     	document.getElementById("frmConfirmar").action ="editar";
+    }
+    
+    document.getElementById("excluir").onclick = function(){
+        document.getElementById("frmConfirmar").action ="excluir";
+    }
+    document.getElementById("confirmar").onclick = function(){
+        document.getElementById("frmConfirmar").action ="confirmar";
+    }
+	</script>
 	
 	 <!-- script só para o hamburgão :) --------------------------------------------------->
   <script>

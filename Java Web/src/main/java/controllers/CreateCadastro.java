@@ -79,7 +79,11 @@ public class CreateCadastro extends HttpServlet {
 				System.out.println("Voo "+ cli.getDestino().getVoo().getId());
 				}
 			}
+
+			//FAZENDO RELAÇÃO E PEGANDO T O D O S  O S  D A D O S DO CLIENTE
 			ClienteDAO.fazerRelacao(cli);
+			Cliente cliente = ClienteDAO.mostrarTudo(cli);
+			request.setAttribute("cliente", cliente);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("confirmarCadastro.jsp");
 			requestDispatcher.forward(request, response);
 		}

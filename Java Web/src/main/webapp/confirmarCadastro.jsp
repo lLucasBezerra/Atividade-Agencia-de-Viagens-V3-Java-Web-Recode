@@ -87,7 +87,7 @@
 			<select class="form-select habilitar" name="idDestino" aria-label="Default select example" disabled>
   				<option selected value="${cliente.getDestino().getId()}"> ${cliente.getDestino().getId()} </option>
 				<c:forEach items="${destinos}" var="destinos">
-					 <option value="${destinos.getId()}"> ${destinos.getId()} -- ${destinos.getPais()}</option>
+					 <option value="${destinos.getId()}"> ${destinos.getId()} -- ${destinos.getPais()} -- ${destinos.getCidade()}</option>
 				</c:forEach>
   		
 			</select>
